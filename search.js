@@ -37,7 +37,7 @@ async function getLocationWeather(value) {
 
     updateInterface(weatherObj, name, weather, main, sys, weatherRes);
   } catch (err) {
-    rootRef.innerHTML = "";
+    rootRef.innerHTML = "Please Enter Valid City";
     weatherRef.innerHTML = "";
     tempRef.innerHTML = "";
     sunRef.innerHTML = "";
@@ -45,17 +45,11 @@ async function getLocationWeather(value) {
 }
 
 geolocationRef.addEventListener("click", (e) => {
-  async function getForecastData(latitude, longitude) {
+  async function getForecastData() {
     try {
       const data = await getLocation();
 
       const { latitude, longitude } = data.coords;
-      const cityLocationRes = await axios.get(
-        `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&APPID=**f3dd140967385594d6c2566ef6d28eec&units=metric`
-      );
-      if (cityLocationRes.data.length < 1) {
-        return;
-      }
 
       const weatherRes = await axios.get(
         `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&APPID=**f3dd140967385594d6c2566ef6d28eec&units=metric`
